@@ -20,6 +20,7 @@
   --font-bar: 14.5px/20px 700 "Humber", "Roboto", sans-serif;
   --height-bar: 36px;
   --padding-bar: 5px 24px;
+  --padding-bar-icon-left: 5px 24px 5px 5px;
   /* same as padding bar but with 32px on the right */
   --padding-bar-action: 24px 5px 24px 32px;
   --padding-bar-container: 5px 22px;
