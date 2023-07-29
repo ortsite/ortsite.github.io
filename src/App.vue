@@ -157,7 +157,6 @@ export default {
 <style>
 @import url(@/assets/style/main.css);
 #app {
-  font-family: Humber, Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* size */
@@ -248,7 +247,7 @@ main.page {
 }
 .bar.font-larger {
   font-size: var(--font-bar-larger);
-  font-weight: 600;
+  font-weight: var(--weight-larger);
 }
 /* header title */
 .title-bar {
@@ -284,7 +283,7 @@ main.page {
 .nav-link {
   color: var(--color-text);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: var(--weight-bar-alt);
 }
 
 /* header and footer */

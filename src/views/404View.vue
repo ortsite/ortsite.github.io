@@ -30,7 +30,7 @@ h1 {
   color: var(--color-text);
   text-align: left;
   line-height: 90px;
-  font-weight: 600;
+  font-weight: var(--weight-medium);
   font-size: 76px;
   font-family: sans-serif;
 }

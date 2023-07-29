@@ -4,8 +4,7 @@
       <h1 class="tagline-text">
         <span>Advanced early detection</span>
         <br />
-        <span class="accented-text">Evidence-based</span>
-        <span>treatment</span>.
+        <span class="accented-text">Evidence-based</span>&nbsp;<span>treatment</span>.
       </h1>
       <div class="action-blurb">
         <p class="action-blurb-text">
@@ -147,7 +146,7 @@ section h3 {
   margin: 0;
   padding: 0;
   font-size: 60px;
-  font-weight: 600;
+  font-weight: var(--weight-section);
   line-height: 86px;
 }
 
@@ -160,7 +159,7 @@ h1.tagline-text {
   color: var(--color-text);
   text-align: left;
   line-height: 90px;
-  font-weight: 600;
+  font-weight: var(--weight-tagline);
   font-size: 76px;
   /* spacing */
   margin: 0;
@@ -178,7 +177,7 @@ h1.tagline-text {
 .action-blurb-text {
   font-size: 18.4px;
   line-height: 30px;
-  font-weight: 600;
+  font-weight: var(--weight-medium);
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -214,7 +213,7 @@ h1.tagline-text {
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--color-on-dark-alt);
-  font-weight: 600;
+  font-weight: var(--weight-medium);
   font-size: 30px;
   line-height: 46px;
 }
@@ -282,18 +281,18 @@ h1.tagline-text {
   color: var(--color-blog-post-details);
   font-size: 15px;
   line-height: 22px;
-  font-weight: 600;
+  font-weight: var(--weight-medium);
 }
 .blog-peek .post .post-meta span.post-author {
   color: var(--color-blog-post-author);
   font-size: 18px;
   line-height: 26px;
-  font-weight: 600;
+  font-weight: var(--weight-medium);
 }
 .blog-peek .post .post-title {
   font-size: 31px;
   line-height: 45px;
-  font-weight: 600;
+  font-weight: var(--weight-post);
   /* clip to two lines */
   display: -webkit-box;
   -webkit-line-clamp: 2;
