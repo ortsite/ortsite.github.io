@@ -121,18 +121,15 @@ export default {
       // get scroll position
       const scrollPosition = this.$refs.page?.scrollTop;
       // check if scrolled
-      if (scrollPosition > 0) {
-        this.scrolled = true;
-      } else {
-        this.scrolled = false;
-      }
+      this.scrolled =
+        this.$refs.page?.scrollHeight - 84 <= this.$refs.page?.clientHeight || scrollPosition > 0;
       // check if done scrolling
       this.doneScrolling =
         this.doneScrolling ||
         scrollPosition + 84 + 20 + this.$refs.page?.clientHeight >= this.$refs.page?.scrollHeight;
     },
     checkScrollable(keep) {
-      if (this.$refs.page?.scrollHeight > this.$refs.page?.clientHeight) {
+      if (this.$refs.page?.scrollHeight - 84 > this.$refs.page?.clientHeight) {
         this.canScroll = true;
         this.scrolled = keep ? this.scrolled : false;
         this.doneScrolling = keep ? this.doneScrolling : false;
@@ -309,6 +306,8 @@ header {
 /* contents */
 .loaded-contents {
   flex: 1 1 auto;
+  /* hide footer on small page spread */
+  min-height: calc(100vh - 84px);
 }
 /* transitions */
 </style>
