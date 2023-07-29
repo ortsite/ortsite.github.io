@@ -1,11 +1,15 @@
 {
-  "name": "oriel",
+  "name": "orielresearch",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "publish": "gh-pages -d dist",
+    "predeploy": "npm run build",
+    "deploy": "echo ortsite.github.io > ./dist/CNAME && npm run publish",
+    "postbuild": "copy /Y dist\\index.html dist\\404.html && echo 'Copied index.html to 404.html'"
   },
   "dependencies": {
     "core-js": "^3.8.3",
@@ -23,6 +27,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.0.3",
+    "gh-pages": "^5.0.0",
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.1"
   },
