@@ -2,7 +2,7 @@
   <main class="page" @scroll="scrollHandler" ref="page" :class="{ scrolled: scrolled }">
     <header class="frame">
       <router-link class="title-bar bar bar-button" to="/">
-        <div class="title-icon title-logo"></div>
+        <div class="bar-icon title-logo"></div>
         Oriel Research
       </router-link>
       <div class="flex-spacer"></div>
@@ -28,7 +28,7 @@
     <router-view class="loaded-contents" />
     <footer class="frame">
       <div class="title-bar bar">
-        <div class="title-copyright title-icon"></div>
+        <div class="title-copyright bar-icon"></div>
         2021 All rights reserved to Oriel Research, Inc.
       </div>
       <nav class="nav-bar bar bar-container">
@@ -131,6 +131,7 @@ main.page {
   justify-content: center;
   flex: 0 0 auto;
   gap: var(--gap-bar);
+  width: fit-content;
   /* style */
   text-transform: uppercase;
   color: var(--color-text);
@@ -140,8 +141,15 @@ main.page {
   border-radius: var(--radius-bar);
   font: var(--font-bar);
   padding: var(--padding-bar);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   /* interaction */
   user-select: none;
+}
+.bar-action {
+  padding: var(--padding-bar-action);
+  gap: var(--gap-bar-action);
 }
 .bar-alt {
   background-color: var(--color-bar-dark);
@@ -167,11 +175,21 @@ main.page {
 .title-copyright {
   background: url(@/assets/img/copyright.png);
 }
-.title-icon {
+.bar-icon.out {
+  background: url(@/assets/img/action/out.png);
+}
+.bar-icon.right {
+  background: url(@/assets/img/action/right.png);
+}
+.bar .bar-icon {
   width: var(--size-logo);
   height: var(--size-logo);
   border-radius: var(--size-logo);
   background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  user-select: none;
 }
 /* header nav */
 .nav-link {
@@ -186,7 +204,7 @@ footer,
 .frame {
   padding: var(--padding-frame);
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   gap: var(--gap-frame);
   background: var(--color-bg);
   box-shadow: none;

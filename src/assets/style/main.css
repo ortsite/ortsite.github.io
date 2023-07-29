@@ -58,7 +58,8 @@ body {
   --padding-bar: 5px 24px;
   --padding-bar-icon-left: 5px 24px 5px 8px;
   /* same as padding bar but with 32px on the right */
-  --padding-bar-action: 24px 5px 24px 32px;
+  --padding-bar-action: 5px 24px 5px 24px;
+  --gap-bar-action: 4px;
   --padding-bar-container: 5px 22px;
   --gap-bar-container: 40px;
   --border-bar: var(--border-weight) solid var(--color-border);
@@ -67,8 +68,9 @@ body {
   --padding-frame: 22px 40px;
   --gap-frame: 20px;
   --shadow-frame: 0 0 6px 2px #00000040;
-  --padding-section: 42px 24px 92px;
+  --padding-section: 42px 42px 92px;
   --padding-section-symmetrical: 42px 92px;
+  --gap-text-section: 10px;
   /* text */
   --color-text: #000000;
   --color-text-alt: #1e1e1e;
@@ -88,4 +90,8 @@ body {
   flex: 1;
   user-select: none;
   pointer-events: none;
+}
+
+.accented-text {
+  color: var(--color-accent);
 }
