@@ -1,5 +1,5 @@
 <template>
-  <main class="home" @scroll="scrollHandler" ref="home" :class="{ scrolled: scrolled }">
+  <main class="page" @scroll="scrollHandler" ref="page" :class="{ scrolled: scrolled }">
     <header class="frame">
       <router-link class="title-bar bar bar-button" to="/">
         <div class="title-icon title-logo"></div>
@@ -18,6 +18,13 @@
       </nav>
       <router-link class="bar bar-button bar-alt font-larger" to="/contact">Contact Us</router-link>
     </header>
+    <!--     
+    <router-view class="loaded-contents" v-slot="{ Component, route }">
+      <Transition>
+        <component :is="Component" :key="route.path" />
+      </Transition>
+    </router-view> 
+    -->
     <router-view class="loaded-contents" />
     <footer class="frame">
       <div class="title-bar bar">
@@ -43,11 +50,10 @@
 </template>
 <script>
 export default {
-  name: "HomeView",
+  name: "PageView",
   components: {},
   data() {
     return {
-      // default scrolled to if main.home is scrollable
       scrolled: false,
       pageList: [
         { name: "Home", path: "/" },
@@ -67,13 +73,13 @@ export default {
       return this.pageList.filter((page) => page.path !== this.$route.path);
     },
   },
-  mounted() {
+  created() {
     this.checkScrollable();
   },
   methods: {
     scrollHandler() {
       // get scroll position
-      const scrollPosition = this.$refs.home.scrollTop;
+      const scrollPosition = this.$refs.page?.scrollTop;
       // check if scrolled
       if (scrollPosition > 0) {
         this.scrolled = true;
@@ -82,14 +88,13 @@ export default {
       }
     },
     checkScrollable() {
-      if (this.$refs.home.scrollHeight > this.$refs.home.clientHeight) {
+      if (this.$refs.page?.scrollHeight > this.$refs.page?.clientHeight) {
         this.scrolled = false;
       } else {
         this.scrolled = true;
       }
     },
   },
-  // when page changes, if main.home is scrollable, set scrolled to false, otherwise set to true
   watch: {
     $route() {
       this.checkScrollable();
@@ -106,8 +111,8 @@ export default {
   /* size */
   height: 100%;
 }
-/* handle scroll in home */
-main.home {
+/* handle scroll in page */
+main.page {
   /* overflow */
   overflow-y: auto;
   height: 100%;
@@ -198,4 +203,5 @@ header {
 .loaded-contents {
   flex: 1 1 auto;
 }
+/* transitions */
 </style>
