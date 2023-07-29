@@ -25,27 +25,29 @@
       </Transition>
     </router-view> 
     -->
-    <router-view class="loaded-contents" />
-    <footer class="frame">
-      <div class="title-bar bar">
-        <div class="title-copyright bar-icon"></div>
-        2021 All rights reserved to Oriel Research, Inc.
-      </div>
-      <nav class="nav-bar bar bar-container">
-        <router-link
-          class="nav-link"
-          v-for="page in footerPages"
-          :key="page.name"
-          :to="page.path"
-          exact
-          >{{ page.name }}</router-link
+    <div class="spread-contents">
+      <router-view class="loaded-contents" />
+      <footer class="frame">
+        <div class="title-bar bar">
+          <div class="title-copyright bar-icon"></div>
+          2021 All rights reserved to Oriel Research, Inc.
+        </div>
+        <nav class="nav-bar bar bar-container">
+          <router-link
+            class="nav-link"
+            v-for="page in footerPages"
+            :key="page.name"
+            :to="page.path"
+            exact
+            >{{ page.name }}</router-link
+          >
+        </nav>
+        <div class="flex-spacer"></div>
+        <router-link class="bar bar-button bar-alt font-larger" to="/careers"
+          >Connect With Us</router-link
         >
-      </nav>
-      <div class="flex-spacer"></div>
-      <router-link class="bar bar-button bar-alt font-larger" to="/careers"
-        >Connect With Us</router-link
-      >
-    </footer>
+      </footer>
+    </div>
     <button
       v-if="canScroll"
       ref="scrollbtn"
@@ -301,14 +303,20 @@ header {
   position: sticky;
   top: 0;
 }
-.scrolled > .frame {
+.scrolled .frame {
   box-shadow: var(--shadow-frame);
 }
 /* contents */
 .loaded-contents {
   flex: 1 1 auto;
   /* hide footer on small page spread */
-  min-height: calc(100vh - 84px);
+}
+.spread-contents {
+  flex: 1 1 auto;
+  min-height: 100vh;
+  /* layout */
+  display: flex;
+  flex-flow: column nowrap;
 }
 /* transitions */
 </style>
