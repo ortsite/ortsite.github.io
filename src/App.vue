@@ -1,5 +1,5 @@
 <template>
-  <main class="home" ref="home">
+  <main class="home" @scroll="scrollHandler" ref="home">
     <header class="frame" :class="{ scrolled: scrolled }">
       <button class="title-bar bar bar-button">
         <div class="title-logo"></div>
@@ -45,6 +45,7 @@ export default {
   components: {},
   data() {
     return {
+      scrolled: false,
       pages: [
         { name: "About", path: "/about" },
         { name: "News", path: "/news" },
@@ -60,12 +61,16 @@ export default {
     // log refs
     console.log(this.$refs);
   },
-  computed: {
-    scrolled() {
-      // get how much the container ref has scrolled
-      const scroll = this.$refs?.home?.scrollTop;
-      // return true if the scroll is greater than 0
-      return scroll > 0;
+  methods: {
+    scrollHandler() {
+      // get scroll position
+      const scrollPosition = this.$refs.home.scrollTop;
+      // check if scrolled
+      if (scrollPosition > 0) {
+        this.scrolled = true;
+      } else {
+        this.scrolled = false;
+      }
     },
   },
 };
@@ -144,6 +149,8 @@ footer,
   flex-flow: row nowrap;
   gap: var(--gap-frame);
   background: var(--color-bg);
+  box-shadow: none;
+  transition: box-shadow 1s ease-in-out;
 }
 header {
   position: sticky;
