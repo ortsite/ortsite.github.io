@@ -15,12 +15,6 @@ textarea,
 select,
 option,
 [tabindex] {
-  outline: none;
-  border: none;
-  background: none;
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
   text-decoration: none;
   cursor: pointer;
 }

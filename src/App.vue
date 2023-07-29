@@ -1,10 +1,10 @@
 <template>
-  <main class="home" @scroll="scrollHandler" ref="home">
-    <header class="frame" :class="{ scrolled: scrolled }">
-      <button class="title-bar bar bar-button">
-        <div class="title-logo"></div>
+  <main class="home" @scroll="scrollHandler" ref="home" :class="{ scrolled: scrolled }">
+    <header class="frame">
+      <router-link class="title-bar bar bar-button" to="/">
+        <div class="title-icon title-logo"></div>
         Oriel Research
-      </button>
+      </router-link>
       <div class="flex-spacer"></div>
       <nav class="nav-bar bar bar-container">
         <router-link
@@ -16,15 +16,14 @@
           >{{ page.name }}</router-link
         >
       </nav>
-      <button class="bar bar-button bar-alt font-larger">Contact Us</button>
+      <router-link class="bar bar-button bar-alt font-larger" to="/contact">Contact Us</router-link>
     </header>
-    <router-view />
+    <router-view class="loaded-contents" />
     <footer class="frame">
-      <button class="title-bar bar bar-button">
-        <div class="title-copyright"></div>
+      <div class="title-bar bar">
+        <div class="title-copyright title-icon"></div>
         2021 All rights reserved to Oriel Research, Inc.
-      </button>
-      <div class="flex-spacer"></div>
+      </div>
       <nav class="nav-bar bar bar-container">
         <router-link
           class="nav-link"
@@ -35,7 +34,10 @@
           >{{ page.name }}</router-link
         >
       </nav>
-      <button class="bar bar-button bar-alt font-larger">Connect With Us</button>
+      <div class="flex-spacer"></div>
+      <router-link class="bar bar-button bar-alt font-larger" to="/careers"
+        >Connect With Us</router-link
+      >
     </footer>
   </main>
 </template>
@@ -45,8 +47,10 @@ export default {
   components: {},
   data() {
     return {
+      // default scrolled to if main.home is scrollable
       scrolled: false,
-      pages: [
+      pageList: [
+        { name: "Home", path: "/" },
         { name: "About", path: "/about" },
         { name: "News", path: "/news" },
         { name: "Careers", path: "/careers" },
@@ -57,9 +61,14 @@ export default {
       ],
     };
   },
+  computed: {
+    pages() {
+      // filter out current page name from pageList
+      return this.pageList.filter((page) => page.path !== this.$route.path);
+    },
+  },
   mounted() {
-    // log refs
-    console.log(this.$refs);
+    this.checkScrollable();
   },
   methods: {
     scrollHandler() {
@@ -72,6 +81,19 @@ export default {
         this.scrolled = false;
       }
     },
+    checkScrollable() {
+      if (this.$refs.home.scrollHeight > this.$refs.home.clientHeight) {
+        this.scrolled = false;
+      } else {
+        this.scrolled = true;
+      }
+    },
+  },
+  // when page changes, if main.home is scrollable, set scrolled to false, otherwise set to true
+  watch: {
+    $route() {
+      this.checkScrollable();
+    },
   },
 };
 </script>
@@ -81,11 +103,19 @@ export default {
   font-family: Humber, Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* size */
+  height: 100%;
 }
 /* handle scroll in home */
-.home {
+main.home {
+  /* overflow */
   overflow-y: auto;
-  height: 100vh;
+  height: 100%;
+  /* layout */
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
 }
 /* bar things */
 .bar {
@@ -125,13 +155,18 @@ export default {
 .title-bar {
   padding: var(--padding-bar-icon-left);
 }
+
+.title-logo {
+  background: var(--bg-logo);
+}
+.title-copyright {
+  background: url(@/assets/img/copyright.png);
+}
 .title-icon {
   width: var(--size-logo);
   height: var(--size-logo);
   border-radius: var(--size-logo);
-}
-.title-logo {
-  background: var(--bg-logo);
+  background-size: contain;
 }
 /* header nav */
 .nav-link {
@@ -156,8 +191,11 @@ header {
   position: sticky;
   top: 0;
 }
-.frame.scrolled,
-footer.frame {
+.scrolled > .frame {
   box-shadow: var(--shadow-frame);
+}
+/* contents */
+.loaded-contents {
+  flex: 1 1 auto;
 }
 </style>
