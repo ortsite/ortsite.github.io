@@ -78,9 +78,11 @@ body {
   /* tagline text */
   --font-tagline: 76px/90px 600 "Humber", "Roboto", sans-serif;
   /* blog post */
+  --border-blog-post: 1.5px solid var(--color-blog-post-stroke);
   --color-blog-post-details: #b6b6b6;
   --color-blog-post-author: #858585;
   --color-blog-post-stroke: #3d3d3d75;
+  --width-blog-post: 355px;
   /* logo */
   --size-logo: 26px;
   --bg-logo: var(--color-accent);

@@ -34,6 +34,24 @@
           alt="Johnson &amp; Johnson Innovation"
         />
       </div>
+      <div class="blog-peek">
+        <article class="post" v-for="post in blogPeek" :key="post.title">
+          <img class="post-img" :src="post.src" :alt="'Post image for: ' + post.title" />
+          <div class="post-details">
+            <div class="post-meta-wrapper">
+              <img class="post-author-img" :src="post.authorImg" :alt="post.author" />
+              <p class="post-meta">
+                <span class="post-author">{{ post.author }}</span>
+                <br />
+                <span class="post-length">{{ post.length }}</span
+                >&nbsp;·&nbsp;
+                <span class="post-date">{{ post.date }}</span>
+              </p>
+            </div>
+            <div class="post-title">{{ post.title }}</div>
+          </div>
+        </article>
+      </div>
     </section>
   </div>
 </template>
@@ -47,6 +65,7 @@ export default {
       {
         title: "Myelodysplastic Syndrome to Acute Myeloid Leukemia",
         author: "Eila Oriel Research",
+        authorImg: require("@/assets/img/blog/eila.png"),
         length: "6 min",
         date: "June 4",
         src: require("@/assets/img/blog/myelodysplastic.png"),
@@ -54,6 +73,7 @@ export default {
       {
         title: "ORT launches metagenomics pipeline",
         author: "Eila Oriel Research",
+        authorImg: require("@/assets/img/blog/eila.png"),
         length: "1 min",
         date: "June 4",
         src: require("@/assets/img/blog/launch.png"),
@@ -137,9 +157,13 @@ h1.tagline-text {
 .about-section {
   background: var(--color-bg-dark);
   color: var(--color-text-dark-alt);
+  /* allow for better blog post overflow */
+  padding-right: 0;
+  gap: 6px;
 }
 .about-section .text-section {
   flex: 1 1 835px;
+  padding-right: 24px;
 }
 .about-section .section-text {
   display: -webkit-box;
@@ -155,5 +179,79 @@ h1.tagline-text {
 .jj-logo {
   max-width: 100%;
   height: auto;
+}
+.blog-peek {
+  flex: 1 1 325px;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 40px;
+  overflow-x: auto;
+}
+.blog-peek::-webkit-scrollbar {
+  display: none;
+}
+.blog-peek .post {
+  border-radius: 20px;
+  border: var(--border-blog-post);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  /* layout */
+  overflow: hidden;
+  display: flex;
+  flex-flow: column nowrap;
+  width: var(--width-blog-post);
+  min-width: var(--width-blog-post);
+  max-width: var(--width-blog-post);
+  cursor: pointer;
+}
+.blog-peek .post .post-img {
+  height: 175px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.blog-peek .post * {
+  user-select: none;
+}
+.blog-peek .post .post-details {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 15px 18px;
+  gap: 10px;
+}
+.blog-peek .post .post-meta-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 10px;
+}
+.blog-peek .post .post-meta-wrapper .post-author-img {
+  height: 52px;
+  width: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+.blog-peek .post .post-meta span {
+  color: var(--color-blog-post-details);
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
+}
+.blog-peek .post .post-meta span.post-author {
+  color: var(--color-blog-post-author);
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+}
+.blog-peek .post .post-title {
+  font-size: 31px;
+  line-height: 45px;
+  font-weight: 600;
+  /* clip to two lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 </style>
