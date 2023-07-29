@@ -163,6 +163,7 @@ export default {
 main.page {
   /* overflow */
   overflow-y: auto;
+  overflow-x: hidden;
   height: 100%;
   /* layout */
   display: flex;
