@@ -51,7 +51,34 @@
             <div class="post-title">{{ post.title }}</div>
           </div>
         </article>
+        <div class="blog-peek-more-overlay">
+          <router-link class="blog-peek-more-button bar bar-button bar-action bar-large" to="/blog">
+            More<span class="bar-icon right"></span>
+          </router-link>
+        </div>
       </div>
+    </section>
+    <section class="services-section alt text-section">
+      <h3 class="section-title">ORT Services</h3>
+      <div class="section-contents"></div>
+    </section>
+    <section class="gpt-section text-section">
+      <div class="section-header">
+        <h3 class="section-title">ORT-GPT</h3>
+        <button class="bar bar-button bar-action bar-dark-border">
+          Try an Example <span class="bar-icon out"></span>
+        </button>
+      </div>
+      <div class="section-contents"></div>
+    </section>
+    <section class="team-section alt text-section">
+      <div class="section-header">
+        <h3 class="section-title">Our Team</h3>
+        <router-link class="bar bar-button bar-action bar-dark-border" to="/careers">
+          Explore Careers <span class="bar-icon out"></span>
+        </router-link>
+      </div>
+      <div class="section-contents"></div>
     </section>
   </div>
 </template>
@@ -90,6 +117,9 @@ section {
   flex-flow: row wrap;
   padding: var(--padding-section);
 }
+section.alt {
+  background: var(--color-bg-alt);
+}
 section.row {
   flex-direction: row;
 }
@@ -104,7 +134,14 @@ section .text-section {
   justify-content: flex-start;
   gap: var(--gap-text-section);
 }
-
+section .section-header {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
 section .section-title,
 section h3 {
   margin: 0;
@@ -117,6 +154,7 @@ section h3 {
 /* first section */
 .tagline-section {
   gap: 50px;
+  justify-content: space-between;
 }
 h1.tagline-text {
   color: var(--color-text);
@@ -135,12 +173,12 @@ h1.tagline-text {
   flex: 1 1 325px;
   display: flex;
   flex-flow: column nowrap;
+  max-width: 500px;
 }
 .action-blurb-text {
-  font-size: 18.4;
+  font-size: 18.4px;
   line-height: 30px;
   font-weight: 600;
-  max-width: 600px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -152,6 +190,7 @@ h1.tagline-text {
   justify-content: flex-start;
   align-items: center;
   flex-grow: 1;
+  padding: 10px 0;
 }
 /* second section */
 .about-section {
@@ -160,10 +199,13 @@ h1.tagline-text {
   /* allow for better blog post overflow */
   padding-right: 0;
   gap: 6px;
+  /* for blog post on newline at end */
+  justify-content: flex-end;
 }
 .about-section .text-section {
-  flex: 1 1 835px;
+  flex: 0 1 835px;
   padding-right: 24px;
+  margin-right: auto;
 }
 .about-section .section-text {
   display: -webkit-box;
@@ -186,6 +228,10 @@ h1.tagline-text {
   flex-flow: row nowrap;
   gap: 40px;
   overflow-x: auto;
+  /* for overlay positioning */
+  position: relative;
+  /* for when wrapped to newline gradient still looks right*/
+  max-width: fit-content;
 }
 .blog-peek::-webkit-scrollbar {
   display: none;
@@ -253,5 +299,41 @@ h1.tagline-text {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+.blog-peek-more-overlay {
+  width: 285px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: linear-gradient(90deg, #00000000 0%, var(--color-bg-dark) 100%);
+  padding: 36px;
+  /* layout */
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-end;
+  /* interaction */
+  pointer-events: none;
+}
+.blog-peek-more-button {
+  pointer-events: all;
+}
+.blog-peek-more-button span {
+  margin-right: -4px;
+}
+/* third section */
+.services-section {
+}
+.services-section .section-title {
+  margin-bottom: 20px;
+}
+
+/* forth section */
+.gpt-section {
+}
+
+/* fifth section */
+.team-section {
 }
 </style>

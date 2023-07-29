@@ -46,6 +46,15 @@
         >Connect With Us</router-link
       >
     </footer>
+    <button
+      v-if="canScroll"
+      ref="scrollbtn"
+      @click="scrollToBottom"
+      class="scroll-btn bar bar-action bar-large"
+      :class="{ done: doneScrolling }"
+    >
+      Scroll <span class="bar-icon down"></span>
+    </button>
   </main>
 </template>
 <script>
@@ -55,6 +64,8 @@ export default {
   data() {
     return {
       scrolled: false,
+      doneScrolling: false,
+      canScroll: true,
       pageList: [
         { name: "Home", path: "/" },
         { name: "About", path: "/about" },
@@ -73,11 +84,40 @@ export default {
       return this.pageList.filter((page) => page.path !== this.$route.path);
     },
   },
-  created() {
-    this.checkScrollable();
+  mounted() {
+    // run check scrollable after short delay
+    setTimeout(() => {
+      this.checkScrollable(false);
+    }, 20);
   },
   methods: {
+    scrollToBottom() {
+      const pageElement = this.$refs.page,
+        scrollHeight = pageElement.scrollHeight,
+        clientHeight = pageElement.clientHeight,
+        duration = 1000;
+      let startTime;
+      function scrollStep(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = timestamp - startTime;
+        const scrollY = easeInOutCubic(progress, 0, scrollHeight - clientHeight, duration);
+        pageElement.scrollTop = scrollY;
+        if (progress < duration) {
+          window.requestAnimationFrame(scrollStep);
+        }
+      }
+      function easeInOutCubic(t, b, c, d) {
+        t /= d / 2;
+        if (t < 1) return (c / 2) * t * t * t + b;
+        t -= 2;
+        return (c / 2) * (t * t * t + 2) + b;
+      }
+
+      window.requestAnimationFrame(scrollStep);
+      window.requestAnimationFrame(scrollStep.bind(this));
+    },
     scrollHandler() {
+      this.checkScrollable(true);
       // get scroll position
       const scrollPosition = this.$refs.page?.scrollTop;
       // check if scrolled
@@ -86,18 +126,30 @@ export default {
       } else {
         this.scrolled = false;
       }
+      // check if done scrolling
+      this.doneScrolling =
+        this.doneScrolling ||
+        scrollPosition + 84 + 20 + this.$refs.page?.clientHeight >= this.$refs.page?.scrollHeight;
     },
-    checkScrollable() {
+    checkScrollable(keep) {
       if (this.$refs.page?.scrollHeight > this.$refs.page?.clientHeight) {
-        this.scrolled = false;
+        this.canScroll = true;
+        this.scrolled = keep ? this.scrolled : false;
+        this.doneScrolling = keep ? this.doneScrolling : false;
       } else {
         this.scrolled = true;
+        this.doneScrolling = true;
+        this.canScroll = false;
       }
     },
   },
   watch: {
     $route() {
-      this.checkScrollable();
+      this.checkScrollable(false);
+      // backup for waiting for page to render
+      setTimeout(() => {
+        this.checkScrollable(false);
+      }, 20);
     },
   },
 };
@@ -121,6 +173,32 @@ main.page {
   flex-flow: column nowrap;
   align-items: stretch;
   justify-content: flex-start;
+}
+.bar.scroll-btn {
+  padding: 5px 16px;
+  bottom: 20px;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: bottom 1.2s ease-in-out;
+  z-index: 10;
+}
+.bar.scroll-btn:not(.done) {
+  animation: raise_btn 0.6s ease-out;
+}
+@keyframes raise_btn {
+  0% {
+    bottom: -45px;
+  }
+  100% {
+    bottom: 20px;
+  }
+}
+.bar.scroll-btn.done {
+  bottom: -100px;
+}
+.bar.scroll-btn span {
+  margin-right: -6px;
 }
 /* bar things */
 .bar {
@@ -147,9 +225,17 @@ main.page {
   /* interaction */
   user-select: none;
 }
+.bar.bar-dark-border {
+  border-color: var(--color-border-dark);
+}
 .bar-action {
   padding: var(--padding-bar-action);
   gap: var(--gap-bar-action);
+}
+.bar-large {
+  height: 44px;
+  font-size: 18px;
+  gap: 12px;
 }
 .bar-alt {
   background-color: var(--color-bar-dark);
@@ -181,6 +267,9 @@ main.page {
 .bar-icon.right {
   background: url(@/assets/img/action/right.png);
 }
+.bar-icon.down {
+  background: url(@/assets/img/action/down.png);
+}
 .bar .bar-icon {
   width: var(--size-logo);
   height: var(--size-logo);
@@ -209,6 +298,7 @@ footer,
   background: var(--color-bg);
   box-shadow: none;
   transition: box-shadow 1s ease-in-out;
+  z-index: 11;
 }
 header {
   position: sticky;
