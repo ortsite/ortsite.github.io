@@ -65,13 +65,19 @@
           <div id="video">
             <iframe
               id="video-iframe"
-              src="https://www.youtube-nocookie.com/embed/Zuf-PAWWEzo?vq=hd1080&modestbranding=1&rel=0&iv_load_policy=3&fs=0&color=white&disablekb=1&q=orielresearch"
+              @load="onFrameLoad"
+              :src="`https://www.youtube-nocookie.com/embed/${vid_id}?vq=hd1080&modestbranding=1&rel=0&iv_load_policy=3&fs=0&color=white&disablekb=1&q=orielresearch`"
               width="1920"
               height="1080"
               title="Oriel Research Therapeutics - Services"
               frameborder="0"
+              :style="{ visibility: frame_loading ? 'hidden' : 'visible' }"
             ></iframe>
-            <button class="video-next bar bar-action bar-large">
+            <button
+              v-if="has_next_vid"
+              @click="next_vid"
+              class="video-next bar bar-action bar-large"
+            >
               Next<span class="bar-icon right"></span>
             </button>
           </div>
@@ -105,6 +111,9 @@
 export default {
   name: "HomeView",
   data: () => ({
+    frame_loading: true,
+    vid_ids: ["Zuf-PAWWEzo", "FgO9Pugmd0o"],
+    vid_index: 0,
     blogPeek: [
       // will be loaded from json
       {
@@ -125,7 +134,26 @@ export default {
       },
     ],
   }),
-  components: {},
+  computed: {
+    vid_id() {
+      return this.vid_ids[this.vid_index];
+    },
+    has_next_vid() {
+      // return true since we'll loop through
+      return true;
+      // return this.vid_index < this.vid_ids.length - 1;
+    },
+  },
+  methods: {
+    onFrameLoad() {
+      this.frame_loading = false;
+    },
+    next_vid() {
+      this.vid_index++;
+      this.vid_index %= this.vid_ids.length;
+      this.frame_loading = true;
+    },
+  },
 };
 </script>
 
@@ -346,6 +374,7 @@ h1.tagline-text {
   flex-flow: row nowrap;
   gap: 30px;
   width: 100%;
+  align-items: center;
 }
 .services-section .services-graphic {
   width: 450px;
@@ -356,52 +385,53 @@ h1.tagline-text {
   /* don't keep aspect ratio */
   aspect-ratio: none;
 }
-.video-stack {
+.services-section .video-stack {
   height: 100%;
   flex-grow: 1;
   display: flex;
   flex-flow: row nowrap;
   align-items: stretch;
   justify-content: stretch;
-  gap: -20px;
-  border-radius: 20px;
-  box-shadow: 0 0 16px #91919126;
-}
-.video-stack > * {
   border-radius: 20px;
   overflow: hidden;
+  box-shadow: 0 0 16px #91919126;
 }
-.video-stack .video-after {
+.services-section .video-stack > * {
+  border-radius: 0 20px 20px 0;
+  overflow: hidden;
+}
+.services-section .video-stack .video-after {
   margin-left: -40px;
 }
-.video-stack #video {
+.services-section .video-stack #video {
   flex: 9 1 700px;
   position: relative;
   height: 100%;
-  background: url(@/assets/img/video-placeholder.png) cover center no-repeat;
+  background: url(@/assets/img/video-placeholder.png) center no-repeat;
+  background-size: cover;
   background-color: var(--color-bg);
   z-index: 3;
 }
-.video-stack .video-after-1 {
+.services-section.video-stack .video-after-1 {
   flex: 4 1 120px;
   background: #abb6c7;
   z-index: 2;
 }
-.video-stack .video-after-2 {
+.services-section .video-stack .video-after-2 {
   flex: 3 1 70px;
   background: #f2d3a7;
   z-index: 1;
 }
 
-.video-next {
+.services-section .video-next {
   z-index: 10;
 }
-#video::before {
+.services-section #video::before {
   content: "";
   display: block;
   padding-top: 56.25%;
 }
-#video-iframe {
+.services-section #video-iframe {
   width: calc(100% + 4px);
   height: calc(100% + 4px);
   margin: -2px;
@@ -409,7 +439,7 @@ h1.tagline-text {
   top: 0;
   left: 0;
 }
-.video-next {
+.services-section .video-next {
   position: absolute;
   bottom: 25px;
   right: 25px;
