@@ -37,7 +37,7 @@
   --padding-bar-action: 4px 19px 4px 19px;
   --gap-bar-action: 4px;
   --padding-bar-container: 4px 17.6px;
-  --gap-bar-container: 32px;
+  --gap-bar-container: 26px;
   --font-bar-larger: 12px;
   /* layout */
   --padding-frame: 17.6px 32px;
@@ -116,4 +116,7 @@ body {
 
 .accented-text {
   color: var(--color-accent);
+}
+.nogap {
+  gap: 0 !important;
 }

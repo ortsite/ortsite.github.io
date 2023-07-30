@@ -32,7 +32,10 @@
       <footer class="frame">
         <div class="title-bar bar">
           <div class="title-copyright bar-icon"></div>
-          2021 All rights reserved to Oriel Research, Inc.
+          <span
+            >2021-2023 <span class="desktop-text">All rights reserved to</span> Oriel Research,
+            Inc.</span
+          >
         </div>
         <nav class="nav-bar bar bar-container">
           <router-link
@@ -41,12 +44,12 @@
             :key="page.name"
             :to="page.path"
             exact
-            >{{ page.name }}</router-link
+            >{{ page.name }}<span class="desktop-text">{{ page.desktop }}</span></router-link
           >
         </nav>
         <div class="flex-spacer"></div>
-        <router-link class="bar bar-button bar-alt font-larger" to="/careers"
-          >Connect With Us</router-link
+        <router-link class="bar bar-button bar-alt font-larger nogap" to="/careers"
+          >Connect<span class="desktop-text">&nbsp;With Us</span></router-link
         >
       </footer>
     </div>
@@ -77,7 +80,7 @@ export default {
         { name: "Careers", path: "/careers" },
       ],
       footerPages: [
-        { name: "Terms of Use", path: "/terms" },
+        { name: "Terms", desktop: " of Use", path: "/terms" },
         { name: "Privacy Policy", path: "/privacy" },
       ],
     };
@@ -249,17 +252,12 @@ main.page {
   gap: var(--gap-bar-container);
   padding: var(--padding-bar-container);
 }
-@media (min-width: 1650px) {
-  section-wrapper {
-    background: none !important;
-  }
-  section {
-    border-radius: 16px;
-    margin: 30px auto;
-  }
+.frame .bar-container {
+  justify-content: space-evenly;
+  display: flex;
 }
 @media (max-width: 620px) {
-  .bar-container {
+  .frame .bar-container {
     gap: 5px;
   }
   .frame .flex-spacer {
@@ -269,6 +267,9 @@ main.page {
   footer {
     justify-content: space-evenly;
   }
+  .desktop-text {
+    display: none;
+  }
 }
 @media (max-width: 545px) {
   main.scrolled header .title-bar {
@@ -277,6 +278,11 @@ main.page {
   main.scrolled header {
     justify-content: space-between;
   }
+  main.scrolled .frame .bar-container {
+    justify-content: space-evenly;
+    gap: 2px;
+    flex-grow: 1;
+  }
 }
 @media (max-width: 370px) {
   main.scrolled header .contact-btn {
@@ -284,11 +290,6 @@ main.page {
   }
   main.scrolled header {
     justify-content: center;
-  }
-  main.scrolled .bar-container {
-    width: 100%;
-    gap: 2px;
-    justify-content: space-evenly;
   }
 }
 .bar.font-larger {
@@ -350,6 +351,7 @@ footer,
   box-shadow: none;
   transition: box-shadow 1s ease-in-out;
   z-index: 11;
+  height: auto;
 }
 header {
   position: sticky;
