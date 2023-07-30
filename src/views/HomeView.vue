@@ -295,6 +295,9 @@ h1.tagline-text {
     line-height: 58px;
     font-size: 48px;
   }
+  .tagline-section {
+    gap: 10px;
+  }
 }
 .tagline {
   flex: 1 1 828px;

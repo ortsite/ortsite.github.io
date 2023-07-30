@@ -253,10 +253,11 @@ main.page {
   .bar-container {
     gap: 5px;
   }
-  header .flex-spacer {
+  .frame .flex-spacer {
     display: none;
   }
-  header {
+  header,
+  footer {
     justify-content: space-evenly;
   }
 }

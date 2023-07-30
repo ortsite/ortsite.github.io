@@ -43,8 +43,8 @@
   --padding-frame: 17.6px 32px;
   --gap-frame: 16px;
   --shadow-frame: 0 0 4.5px 2px #00000040;
-  --padding-section: 34px 34px 92px;
-  --padding-section-symmetrical: 42px 74px;
+  --padding-section: 34px 34px 74px;
+  --padding-section-symmetrical: 34px 74px;
   --gap-text-section: 8px;
   /* text */
   --color-text: #000000;
@@ -65,6 +65,12 @@
   --padding-team-card: 27px 19px;
   --width-team-card: 395px;
   --gap-team-member: 19.2px;
+}
+@media (max-width: 540px) {
+  :root {
+    --padding-section: 30px 30px 54px;
+    --padding-section-symmetrical: 30px 54px;
+  }
 }
 
 * {
