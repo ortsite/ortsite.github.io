@@ -103,8 +103,11 @@
       <section class="gpt-section text-section">
         <div class="section-header">
           <h3 class="section-title">ORT-GPT</h3>
-          <button class="bar bar-button bar-action bar-dark-border">
-            Try an Example <span class="bar-icon out"></span>
+          <button
+            @click="prompt = 'Example prompt text to autofill.'"
+            class="bar bar-button bar-action bar-dark-border"
+          >
+            Try an Example <span class="bar-icon gpt"></span>
           </button>
         </div>
         <div class="section-contents">
@@ -115,7 +118,7 @@
             once you hit the submit button, your request will be shared with the ORT team.
           </p>
           <div class="query-box">
-            <textarea placeholder="Your Query"></textarea>
+            <textarea placeholder="Your Query" v-model="prompt"></textarea>
             <button class="query-submit bar bar-button bar-action">
               Submit Query <span class="bar-icon send"></span>
             </button>
@@ -155,6 +158,7 @@
 export default {
   name: "HomeView",
   data: () => ({
+    prompt: "",
     team: [
       {
         name: "Elia Arich",

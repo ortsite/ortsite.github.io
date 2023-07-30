@@ -274,6 +274,9 @@ main.page {
 .bar-icon.send {
   background: url(@/assets/img/action/send.png);
 }
+.bar-icon.gpt {
+  background: url(@/assets/img/action/gpt.png);
+}
 .bar .bar-icon {
   width: var(--size-logo);
   height: var(--size-logo);
