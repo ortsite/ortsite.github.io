@@ -235,14 +235,14 @@ section {
   display: flex;
   flex-flow: row wrap;
   padding: var(--padding-section);
-  max-width: 1400px;
+  max-width: 1300px;
   margin: 0 auto;
 }
 section.alt,
 section-wrapper.alt {
   background: var(--color-bg-alt);
 }
-@media (min-width: 1500px) {
+@media (min-width: 1390px) {
   section-wrapper {
     background: none !important;
   }
