@@ -176,8 +176,8 @@ main.page {
   justify-content: flex-start;
 }
 .bar.scroll-btn {
-  padding: 5px 16px;
-  bottom: 20px;
+  padding: 4px 13px;
+  bottom: 16px;
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
@@ -192,14 +192,14 @@ main.page {
     bottom: -45px;
   }
   100% {
-    bottom: 20px;
+    bottom: 16px;
   }
 }
 .bar.scroll-btn.done {
   bottom: -100px;
 }
 .bar.scroll-btn span {
-  margin-right: -6px;
+  margin-right: -5px;
 }
 /* bar things */
 .bar {
@@ -234,9 +234,9 @@ main.page {
   gap: var(--gap-bar-action);
 }
 .bar-large {
-  height: 44px;
-  font-size: 18px;
-  gap: 12px;
+  height: 36px;
+  font-size: 14.5px;
+  gap: 10px;
 }
 .bar-alt {
   background-color: var(--color-bar-dark);
