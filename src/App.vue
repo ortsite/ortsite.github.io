@@ -249,6 +249,15 @@ main.page {
   gap: var(--gap-bar-container);
   padding: var(--padding-bar-container);
 }
+@media (min-width: 1650px) {
+  section-wrapper {
+    background: none !important;
+  }
+  section {
+    border-radius: 16px;
+    margin: 30px auto;
+  }
+}
 @media (max-width: 620px) {
   .bar-container {
     gap: 5px;

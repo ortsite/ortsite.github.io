@@ -235,12 +235,24 @@ section {
   display: flex;
   flex-flow: row wrap;
   padding: var(--padding-section);
-  max-width: 1500px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 section.alt,
 section-wrapper.alt {
   background: var(--color-bg-alt);
+}
+@media (min-width: 1500px) {
+  section-wrapper {
+    background: none !important;
+  }
+  section {
+    border-radius: 16px;
+    margin: 30px auto;
+  }
+  section.tagline-section {
+    margin-top: 0px;
+  }
 }
 section.row {
   flex-direction: row;
