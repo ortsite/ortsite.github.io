@@ -146,6 +146,8 @@ export default {
     $route() {
       this.checkScrollable(false);
       // backup for waiting for page to render
+      // scroll to top
+      this.$refs.page.scrollTop = 0;
       setTimeout(() => {
         this.checkScrollable(false);
       }, 20);

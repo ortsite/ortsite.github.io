@@ -16,6 +16,7 @@
   --weight-post: 620;
   --weight-section: 610;
   --weight-bar-alt: 660;
+  --weight-team-name: 530;
   /* color bg */
   --color-accent: #b88e54;
   --color-bg: #ffffff;
@@ -65,6 +66,8 @@
   /* logo */
   --size-logo: 26px;
   --bg-logo: var(--color-accent);
+  /* team */
+  --padding-team-card: 34px 24px;
 }
 
 * {
@@ -80,7 +83,8 @@ input,
 textarea,
 select,
 option,
-[tabindex] {
+[tabindex],
+.pointer {
   text-decoration: none;
   cursor: pointer;
 }

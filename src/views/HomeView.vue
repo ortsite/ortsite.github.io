@@ -63,16 +63,19 @@
         <img :src="require('@/assets/img/graphic/organic.svg')" alt="" class="services-graphic" />
         <div class="video-stack">
           <div id="video">
-            <iframe
-              id="video-iframe"
-              @load="onFrameLoad"
-              :src="`https://www.youtube-nocookie.com/embed/${vid_id}?vq=hd1080&modestbranding=1&rel=0&iv_load_policy=3&fs=0&color=white&disablekb=1&q=orielresearch`"
-              width="1920"
-              height="1080"
-              title="Oriel Research Therapeutics - Services"
-              frameborder="0"
-              :style="{ visibility: frame_loading ? 'hidden' : 'visible' }"
-            ></iframe>
+            <Transition name="fade-out" mode="out-in">
+              <iframe
+                id="video-iframe"
+                @load="onFrameLoad"
+                :src="`https://www.youtube-nocookie.com/embed/${vid_id}?vq=hd1080&modestbranding=1&rel=0&iv_load_policy=3&fs=0&color=white&disablekb=1&q=orielresearch`"
+                width="1920"
+                height="1080"
+                title="Oriel Research Therapeutics - Services"
+                frameborder="0"
+                :class="{ ready: !frame_loading }"
+                :key="vid_id"
+              ></iframe>
+            </Transition>
             <button
               v-if="has_next_vid"
               @click="next_vid"
@@ -102,7 +105,22 @@
           Explore Careers <span class="bar-icon out"></span>
         </router-link>
       </div>
-      <div class="section-contents"></div>
+      <div class="section-contents">
+        <div class="team-member" v-for="member in team" :key="member.name">
+          <div class="team-member-name">{{ member.name }} {{ member.cert }}</div>
+          <a
+            class="team-member-contact bar bar-button bar-action pointer"
+            @click="open('mailto:' + member.contact, '_blank')"
+            >Contact {{ member.name.split(" ")[0] }}
+            <span class="bar-icon out"></span>
+          </a>
+          <img class="team-member-img" :src="member.img" :alt="member.name" />
+          <div class="team-member-details">
+            <div class="team-member-title">{{ member.title }}</div>
+            <div class="team-member-roles">{{ member.roles }}</div>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -111,6 +129,24 @@
 export default {
   name: "HomeView",
   data: () => ({
+    team: [
+      {
+        name: "Elia Arich",
+        cert: "ME",
+        contact: "info@orielresearch.com",
+        img: require("@/assets/img/team/elia.png"),
+        title: "Founder, CEO",
+        roles: "Microsoft Technion, Broad Institute, MGH, Whitehead Institute, Stanford",
+      },
+      {
+        name: "Noam Shoresh",
+        cert: "PhD",
+        contact: "info@orielresearch.com",
+        img: require("@/assets/img/team/noam.png"),
+        title: "Science, Bioinformatics",
+        roles: "Harvard Medical School, Broad Institute, MGH, The Hebrew University",
+      },
+    ],
     frame_loading: true,
     vid_ids: ["Zuf-PAWWEzo", "FgO9Pugmd0o"],
     vid_index: 0,
@@ -152,6 +188,9 @@ export default {
       this.vid_index++;
       this.vid_index %= this.vid_ids.length;
       this.frame_loading = true;
+    },
+    open(url, target) {
+      window.open(url, target);
     },
   },
 };
@@ -379,7 +418,7 @@ h1.tagline-text {
 .services-section .services-graphic {
   width: 450px;
   height: 100%;
-  flex: 450px 0 0;
+  flex: 450px 1 0;
   object-fit: scale-down;
   object-position: center;
   /* don't keep aspect ratio */
@@ -387,7 +426,8 @@ h1.tagline-text {
 }
 .services-section .video-stack {
   height: 100%;
-  flex-grow: 1;
+  flex-grow: 2;
+  flex-basis: 1000px;
   display: flex;
   flex-flow: row nowrap;
   align-items: stretch;
@@ -408,6 +448,7 @@ h1.tagline-text {
   position: relative;
   height: 100%;
   background: url(@/assets/img/video-placeholder.png) center no-repeat;
+  background: url(@/assets/img/video-placeholder.svg) center no-repeat;
   background-size: cover;
   background-color: var(--color-bg);
   z-index: 3;
@@ -438,13 +479,23 @@ h1.tagline-text {
   position: absolute;
   top: 0;
   left: 0;
+  /* for transition */
+  /* transform: scale(0.25);  */
+  /* transform: translateX(100%); */
+  /* transition: transform 0.35s ease-out; */
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
+.services-section #video-iframe.ready {
+  /* transform: translateX(0); */
+  opacity: 1;
 }
 .services-section .video-next {
   position: absolute;
   bottom: 25px;
   right: 25px;
 }
-@media (max-width: 1400px) {
+@media (max-width: 1300px) {
   .services-section .services-graphic {
     display: none;
   }
@@ -455,9 +506,66 @@ h1.tagline-text {
 
 /* forth section */
 .gpt-section {
+  display: flex;
+  flex-flow: row wrap;
 }
 
 /* fifth section */
-.team-section {
+.team-section .section-contents {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 30px;
+  justify-content: flex-start;
+}
+.team-section .team-member {
+  gap: 24px;
+  padding: var(--padding-team-card);
+  display: flex;
+  flex-flow: column nowrap;
+  /* style */
+  background: var(--color-bg-darker);
+  border-radius: 20px;
+  width: 495px;
+  flex: 0 1 495px;
+}
+.team-section .team-member .team-member-name {
+  color: var(--color-text);
+  font-size: 42px;
+  line-height: 60px;
+  font-weight: var(--weight-team-name);
+}
+.team-section .team-member .team-member-img {
+  border-radius: 10px;
+  user-select: none;
+  pointer-events: none;
+}
+.team-section .team-member .team-member-details .team-member-title {
+  color: var(--color-accent);
+  font-weight: 650;
+  font-size: 24px;
+  line-height: 35px;
+  margin-bottom: 10px;
+}
+.team-section .team-member .team-member-details .team-member-roles {
+  color: var(--color-text);
+  font-weight: var(--weight-medium);
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 620;
+  text-transform: uppercase;
+}
+
+#video-iframe {
+  border-radius: 19px;
+  overflow: hidden;
+}
+/* fade transition */
+.fade-out-enter-active,
+.fade-out-leave-active {
+  transition: opacity 0.2s !important;
+}
+
+.fade-out-enter, .fade-out-leave-to /* .fade-out-transition-leave-active in <2.1.8 */ {
+  opacity: 0 !important;
 }
 </style>
