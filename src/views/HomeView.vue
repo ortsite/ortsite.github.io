@@ -59,7 +59,26 @@
     </section>
     <section class="services-section alt text-section">
       <h3 class="section-title">ORT Services</h3>
-      <div class="section-contents"></div>
+      <div class="section-contents">
+        <img :src="require('@/assets/img/graphic/organic.svg')" alt="" class="services-graphic" />
+        <div class="video-stack">
+          <div id="video">
+            <iframe
+              id="video-iframe"
+              src="https://www.youtube-nocookie.com/embed/Zuf-PAWWEzo?vq=hd1080&modestbranding=1&rel=0&iv_load_policy=3&fs=0&color=white&disablekb=1&q=orielresearch"
+              width="1920"
+              height="1080"
+              title="Oriel Research Therapeutics - Services"
+              frameborder="0"
+            ></iframe>
+            <button class="video-next bar bar-action bar-large">
+              Next<span class="bar-icon right"></span>
+            </button>
+          </div>
+          <div class="video-after video-after-1"></div>
+          <div class="video-after video-after-2"></div>
+        </div>
+      </div>
     </section>
     <section class="gpt-section text-section">
       <div class="section-header">
@@ -126,7 +145,7 @@ section.column {
   flex-direction: column;
 }
 
-section .text-section {
+.text-section {
   display: flex;
   flex-flow: column nowrap;
   align-items: flex-start;
@@ -322,7 +341,83 @@ h1.tagline-text {
   margin-right: -4px;
 }
 /* third section */
-.services-section {
+.services-section .section-contents {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 30px;
+  width: 100%;
+}
+.services-section .services-graphic {
+  width: 450px;
+  height: 100%;
+  flex: 450px 0 0;
+  object-fit: scale-down;
+  object-position: center;
+  /* don't keep aspect ratio */
+  aspect-ratio: none;
+}
+.video-stack {
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  justify-content: stretch;
+  gap: -20px;
+  border-radius: 20px;
+  box-shadow: 0 0 16px #91919126;
+}
+.video-stack > * {
+  border-radius: 20px;
+  overflow: hidden;
+}
+.video-stack .video-after {
+  margin-left: -40px;
+}
+.video-stack #video {
+  flex: 9 1 700px;
+  position: relative;
+  height: 100%;
+  background: url(@/assets/img/video-placeholder.png) cover center no-repeat;
+  background-color: var(--color-bg);
+  z-index: 3;
+}
+.video-stack .video-after-1 {
+  flex: 4 1 120px;
+  background: #abb6c7;
+  z-index: 2;
+}
+.video-stack .video-after-2 {
+  flex: 3 1 70px;
+  background: #f2d3a7;
+  z-index: 1;
+}
+
+.video-next {
+  z-index: 10;
+}
+#video::before {
+  content: "";
+  display: block;
+  padding-top: 56.25%;
+}
+#video-iframe {
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  margin: -2px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.video-next {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+}
+@media (max-width: 1400px) {
+  .services-section .services-graphic {
+    display: none;
+  }
 }
 .services-section .section-title {
   margin-bottom: 20px;
