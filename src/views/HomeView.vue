@@ -5,7 +5,7 @@
         <h1 class="tagline-text">
           <span>Advanced early detection</span>
           <br />
-          <span class="accented-text">Evidence-based</span>&nbsp;<span>treatment</span>.
+          <span class="accented-text">Evidence-based</span> <span>treatment</span>.
         </h1>
         <div class="action-blurb">
           <p class="action-blurb-text">
@@ -287,6 +287,14 @@ h1.tagline-text {
   /* spacing */
   margin: 0;
   padding: 0;
+  white-space: break-spaces;
+  max-width: 100%;
+}
+@media (max-width: 540px) {
+  h1.tagline-text {
+    line-height: 58px;
+    font-size: 48px;
+  }
 }
 .tagline {
   flex: 1 1 828px;
@@ -347,6 +355,13 @@ section.about-section {
   font-weight: var(--weight-medium);
   font-size: 24px;
   line-height: 37px;
+}
+@media (max-width: 970px) {
+  .about-section .section-text {
+    font-size: 18px;
+    line-height: 30px;
+    -webkit-line-clamp: unset;
+  }
 }
 .jj-logo {
   max-width: 100%;
@@ -643,6 +658,12 @@ section.about-section {
   line-height: 48px;
   font-weight: var(--weight-team-name);
 }
+@media (max-width: 440px) {
+  .team-section .team-member .team-member-name {
+    font-size: 26px;
+    line-height: 35px;
+  }
+}
 .team-section .team-member .team-member-img {
   border-radius: 8px;
   user-select: none;
@@ -655,6 +676,7 @@ section.about-section {
   line-height: 28px;
   margin-bottom: 8px;
 }
+
 .team-section .team-member .team-member-details .team-member-roles {
   color: var(--color-text);
   font-weight: var(--weight-medium);

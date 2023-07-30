@@ -16,7 +16,9 @@
           >{{ page.name }}</router-link
         >
       </nav>
-      <router-link class="bar bar-button bar-alt font-larger" to="/contact">Contact Us</router-link>
+      <router-link class="contact-btn bar bar-button bar-alt font-larger" to="/contact"
+        >Contact Us</router-link
+      >
     </header>
     <!--     
     <router-view class="loaded-contents" v-slot="{ Component, route }">
@@ -256,6 +258,25 @@ main.page {
   }
   header {
     justify-content: space-evenly;
+  }
+}
+@media (max-width: 545px) {
+  main.scrolled header .title-bar {
+    display: none;
+  }
+  main.scrolled header {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 370px) {
+  main.scrolled header .contact-btn {
+    display: none;
+  }
+  main.scrolled header {
+    justify-content: center;
+  }
+  main.scrolled .bar-container {
+    gap: var(--gap-bar-container);
   }
 }
 .bar.font-larger {
