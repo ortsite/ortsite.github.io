@@ -563,7 +563,6 @@ section.about-section {
   font-size: 18px;
   line-height: 25px;
   border-radius: 20px;
-  margin-right: 30px;
   flex: 2 1 450px;
   /* a little neumorphism with the shadow */
   box-shadow: 2px 2px 6px #cdcdcd80, -2px -2px 6px #ffffffff;
