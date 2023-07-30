@@ -412,7 +412,7 @@ h1.tagline-text {
   background-color: var(--color-bg);
   z-index: 3;
 }
-.services-section.video-stack .video-after-1 {
+.services-section .video-stack .video-after-1 {
   flex: 4 1 120px;
   background: #abb6c7;
   z-index: 2;
