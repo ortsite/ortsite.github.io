@@ -276,7 +276,9 @@ main.page {
     justify-content: center;
   }
   main.scrolled .bar-container {
-    gap: var(--gap-bar-container);
+    width: 100%;
+    gap: 2px;
+    justify-content: space-evenly;
   }
 }
 .bar.font-larger {
