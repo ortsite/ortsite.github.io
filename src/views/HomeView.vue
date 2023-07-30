@@ -1,140 +1,153 @@
 <template>
   <div class="home">
-    <section class="tagline-section" ref="tagline">
-      <h1 class="tagline-text">
-        <span>Advanced early detection</span>
-        <br />
-        <span class="accented-text">Evidence-based</span>&nbsp;<span>treatment</span>.
-      </h1>
-      <div class="action-blurb">
-        <p class="action-blurb-text">
-          Our proprietary machine learning model processes large omic and clinical data to aid
-          diagnosis, therapy matching, and target development.
-        </p>
-        <div class="action-blurb-click-align">
-          <router-link class="bar bar-button bar-action" to="/about"
-            >Discover Technology <span class="bar-icon out"></span
-          ></router-link>
+    <section-wrapper class="tagline-wrapper">
+      <section class="tagline-section" ref="tagline">
+        <h1 class="tagline-text">
+          <span>Advanced early detection</span>
+          <br />
+          <span class="accented-text">Evidence-based</span>&nbsp;<span>treatment</span>.
+        </h1>
+        <div class="action-blurb">
+          <p class="action-blurb-text">
+            Our proprietary machine learning model processes large omic and clinical data to aid
+            diagnosis, therapy matching, and target development.
+          </p>
+          <div class="action-blurb-click-align">
+            <router-link class="bar bar-button bar-action" to="/about"
+              >Discover Technology <span class="bar-icon out"></span
+            ></router-link>
+          </div>
         </div>
-      </div>
-    </section>
-    <section class="about-section">
-      <div class="text-section">
-        <h3 class="section-title">About/Blog</h3>
-        <p class="section-text">
-          Oriel Research Therapeutics (ORT) is a bioinformatics company that provides services both
-          for harmonized real-world patients' derived genomic data, AI based model development, and
-          early detection tests for cancer and other diseases using its AI-based platform.
-        </p>
-        <div class="flex-spacer"></div>
-        <img
-          class="jj-logo"
-          :src="require('@/assets/img/jjinnovation.svg')"
-          alt="Johnson &amp; Johnson Innovation"
-        />
-      </div>
-      <div class="blog-peek">
-        <article class="post" v-for="post in blogPeek" :key="post.title">
-          <img class="post-img" :src="post.src" :alt="'Post image for: ' + post.title" />
-          <div class="post-details">
-            <div class="post-meta-wrapper">
-              <img class="post-author-img" :src="post.authorImg" :alt="post.author" />
-              <p class="post-meta">
-                <span class="post-author">{{ post.author }}</span>
-                <br />
-                <span class="post-length">{{ post.length }}</span
-                >&nbsp;·&nbsp;
-                <span class="post-date">{{ post.date }}</span>
-              </p>
+      </section>
+    </section-wrapper>
+    <section-wrapper class="about-wrapper">
+      <section class="about-section">
+        <div class="text-section">
+          <h3 class="section-title">About/Blog</h3>
+          <p class="section-text">
+            Oriel Research Therapeutics (ORT) is a bioinformatics company that provides services
+            both for harmonized real-world patients' derived genomic data, AI based model
+            development, and early detection tests for cancer and other diseases using its AI-based
+            platform.
+          </p>
+          <div class="flex-spacer"></div>
+          <img
+            class="jj-logo"
+            :src="require('@/assets/img/jjinnovation.svg')"
+            alt="Johnson &amp; Johnson Innovation"
+          />
+        </div>
+        <div class="blog-peek">
+          <article class="post" v-for="post in blogPeek" :key="post.title">
+            <img class="post-img" :src="post.src" :alt="'Post image for: ' + post.title" />
+            <div class="post-details">
+              <div class="post-meta-wrapper">
+                <img class="post-author-img" :src="post.authorImg" :alt="post.author" />
+                <p class="post-meta">
+                  <span class="post-author">{{ post.author }}</span>
+                  <br />
+                  <span class="post-length">{{ post.length }}</span
+                  >&nbsp;·&nbsp;
+                  <span class="post-date">{{ post.date }}</span>
+                </p>
+              </div>
+              <div class="post-title">{{ post.title }}</div>
             </div>
-            <div class="post-title">{{ post.title }}</div>
-          </div>
-        </article>
-        <div class="blog-peek-more-overlay">
-          <router-link class="blog-peek-more-button bar bar-button bar-action bar-large" to="/blog">
-            More<span class="bar-icon right"></span>
-          </router-link>
-        </div>
-      </div>
-    </section>
-    <section class="services-section alt text-section">
-      <h3 class="section-title">ORT Services</h3>
-      <div class="section-contents">
-        <img :src="require('@/assets/img/graphic/organic.svg')" alt="" class="services-graphic" />
-        <div class="video-stack">
-          <div id="video">
-            <Transition name="fade-out" mode="out-in">
-              <iframe
-                id="video-iframe"
-                @load="onFrameLoad"
-                :src="`https://www.youtube-nocookie.com/embed/${vid_id}?vq=hd1080&modestbranding=1&rel=0&iv_load_policy=3&fs=0&color=white&disablekb=1&q=orielresearch`"
-                width="1920"
-                height="1080"
-                title="Oriel Research Therapeutics - Services"
-                frameborder="0"
-                :class="{ ready: !frame_loading }"
-                :key="vid_id"
-              ></iframe>
-            </Transition>
-            <button
-              v-if="has_next_vid"
-              @click="next_vid"
-              class="video-next bar bar-action bar-large"
+          </article>
+          <div class="blog-peek-more-overlay">
+            <router-link
+              class="blog-peek-more-button bar bar-button bar-action bar-large"
+              to="/blog"
             >
-              Next<span class="bar-icon right"></span>
-            </button>
+              More<span class="bar-icon right"></span>
+            </router-link>
           </div>
-          <div class="video-after video-after-1"></div>
-          <div class="video-after video-after-2"></div>
         </div>
-      </div>
-    </section>
-    <section class="gpt-section text-section">
-      <div class="section-header">
-        <h3 class="section-title">ORT-GPT</h3>
-        <button class="bar bar-button bar-action bar-dark-border">
-          Try an Example <span class="bar-icon out"></span>
-        </button>
-      </div>
-      <div class="section-contents">
-        <p class="section-text">
-          Welcome! I'm an AI-powered customer service bot representing ORT-GPT, a professional
-          computational biology service. I'm here to help you with your orders for genomics data and
-          computational analysis services. Simply type your request in the text box below, and once
-          you hit the submit button, your request will be shared with the ORT team.
-        </p>
-        <div class="query-box">
-          <textarea placeholder="Your Query"></textarea>
-          <button class="query-submit bar bar-button bar-action">
-            Submit Query <span class="bar-icon send"></span>
+      </section>
+    </section-wrapper>
+    <section-wrapper class="services-wrapper alt">
+      <section class="services-section alt text-section">
+        <h3 class="section-title">ORT Services</h3>
+        <div class="section-contents">
+          <img :src="require('@/assets/img/graphic/organic.svg')" alt="" class="services-graphic" />
+          <div class="video-stack">
+            <div id="video">
+              <Transition name="fade-out" mode="out-in">
+                <iframe
+                  id="video-iframe"
+                  @load="onFrameLoad"
+                  :src="`https://www.youtube-nocookie.com/embed/${vid_id}?vq=hd1080&modestbranding=1&rel=0&iv_load_policy=3&fs=0&color=white&disablekb=1&q=orielresearch`"
+                  width="1920"
+                  height="1080"
+                  title="Oriel Research Therapeutics - Services"
+                  frameborder="0"
+                  :class="{ ready: !frame_loading }"
+                  :key="vid_id"
+                ></iframe>
+              </Transition>
+              <button
+                v-if="has_next_vid"
+                @click="next_vid"
+                class="video-next bar bar-action bar-large"
+              >
+                Next<span class="bar-icon right"></span>
+              </button>
+            </div>
+            <div class="video-after video-after-1"></div>
+            <div class="video-after video-after-2"></div>
+          </div>
+        </div>
+      </section>
+    </section-wrapper>
+    <section-wrapper class="gpt-wrapper">
+      <section class="gpt-section text-section">
+        <div class="section-header">
+          <h3 class="section-title">ORT-GPT</h3>
+          <button class="bar bar-button bar-action bar-dark-border">
+            Try an Example <span class="bar-icon out"></span>
           </button>
         </div>
-      </div>
-    </section>
-    <section class="team-section alt text-section">
-      <div class="section-header">
-        <h3 class="section-title">Our Team</h3>
-        <router-link class="bar bar-button bar-action bar-dark-border" to="/careers">
-          Explore Careers <span class="bar-icon out"></span>
-        </router-link>
-      </div>
-      <div class="section-contents">
-        <div class="team-member" v-for="member in team" :key="member.name">
-          <div class="team-member-name">{{ member.name }} {{ member.cert }}</div>
-          <a
-            class="team-member-contact bar bar-button bar-action pointer"
-            @click="open('mailto:' + member.contact, '_blank')"
-            >Contact {{ member.name.split(" ")[0] }}
-            <span class="bar-icon out"></span>
-          </a>
-          <img class="team-member-img" :src="member.img" :alt="member.name" />
-          <div class="team-member-details">
-            <div class="team-member-title">{{ member.title }}</div>
-            <div class="team-member-roles">{{ member.roles }}</div>
+        <div class="section-contents">
+          <p class="section-text">
+            Welcome! I'm an AI-powered customer service bot representing ORT-GPT, a professional
+            computational biology service. I'm here to help you with your orders for genomics data
+            and computational analysis services. Simply type your request in the text box below, and
+            once you hit the submit button, your request will be shared with the ORT team.
+          </p>
+          <div class="query-box">
+            <textarea placeholder="Your Query"></textarea>
+            <button class="query-submit bar bar-button bar-action">
+              Submit Query <span class="bar-icon send"></span>
+            </button>
+          </div>
+        </div></section
+    ></section-wrapper>
+    <section-wrapper class="team-wrapper alt">
+      <section class="team-section alt text-section">
+        <div class="section-header">
+          <h3 class="section-title">Our Team</h3>
+          <router-link class="bar bar-button bar-action bar-dark-border" to="/careers">
+            Explore Careers <span class="bar-icon out"></span>
+          </router-link>
+        </div>
+        <div class="section-contents">
+          <div class="team-member" v-for="member in team" :key="member.name">
+            <div class="team-member-name">{{ member.name }} {{ member.cert }}</div>
+            <a
+              class="team-member-contact bar bar-button bar-action pointer"
+              @click="open('mailto:' + member.contact, '_blank')"
+              >Contact {{ member.name.split(" ")[0] }}
+              <span class="bar-icon out"></span>
+            </a>
+            <img class="team-member-img" :src="member.img" :alt="member.name" />
+            <div class="team-member-details">
+              <div class="team-member-title">{{ member.title }}</div>
+              <div class="team-member-roles">{{ member.roles }}</div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </section-wrapper>
   </div>
 </template>
 
@@ -210,6 +223,10 @@ export default {
 </script>
 
 <style scoped>
+section-wrapper {
+  display: block;
+  width: 100%;
+}
 section {
   display: flex;
   flex-flow: row wrap;
@@ -217,7 +234,8 @@ section {
   max-width: 1500px;
   margin: 0 auto;
 }
-section.alt {
+section.alt,
+section-wrapper.alt {
   background: var(--color-bg-alt);
 }
 section.row {
@@ -298,8 +316,11 @@ h1.tagline-text {
   padding: 8px 0;
 }
 /* second section */
-.about-section {
+section.about-section,
+section-wrapper.about-wrapper {
   background: var(--color-bg-dark);
+}
+section.about-section {
   color: var(--color-text-dark-alt);
   /* allow for better blog post overflow */
   padding-right: 0;
