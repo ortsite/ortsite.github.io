@@ -247,6 +247,17 @@ main.page {
   gap: var(--gap-bar-container);
   padding: var(--padding-bar-container);
 }
+@media (max-width: 620px) {
+  .bar-container {
+    gap: 5px;
+  }
+  header .flex-spacer {
+    display: none;
+  }
+  header {
+    justify-content: space-evenly;
+  }
+}
 .bar.font-larger {
   font-size: var(--font-bar-larger);
   font-weight: var(--weight-larger);

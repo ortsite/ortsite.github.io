@@ -351,6 +351,7 @@ section.about-section {
 .jj-logo {
   max-width: 100%;
   height: auto;
+  margin-bottom: 8px;
 }
 .blog-peek {
   flex: 1 1 260px;
@@ -504,7 +505,7 @@ section.about-section {
   z-index: 2;
 }
 .services-section .video-stack .video-after-2 {
-  flex: 3 1 45px;
+  flex: 2 1 70px;
   background: #f2d3a7;
   z-index: 1;
 }
@@ -512,6 +513,7 @@ section.about-section {
 .services-section .video-next {
   z-index: 10;
 }
+
 .services-section #video::before {
   content: "";
   display: block;
@@ -539,6 +541,11 @@ section.about-section {
   position: absolute;
   bottom: 20px;
   right: 20px;
+}
+@media (max-width: 620px) {
+  .services-section .video-after {
+    display: none;
+  }
 }
 @media (max-width: 1040px) {
   .services-section .services-graphic {
@@ -613,6 +620,7 @@ section.about-section {
   flex-flow: row wrap;
   gap: 24px;
   justify-content: flex-start;
+  width: 100%;
 }
 .team-section .section-header {
   margin-bottom: 8px;
@@ -626,6 +634,7 @@ section.about-section {
   background: var(--color-bg-darker);
   border-radius: 16px;
   width: var(--width-team-card);
+  max-width: 100%;
   flex: 0 1 var(--width-team-card);
 }
 .team-section .team-member .team-member-name {
