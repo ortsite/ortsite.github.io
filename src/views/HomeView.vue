@@ -96,7 +96,20 @@
           Try an Example <span class="bar-icon out"></span>
         </button>
       </div>
-      <div class="section-contents"></div>
+      <div class="section-contents">
+        <p class="section-text">
+          Welcome! I'm an AI-powered customer service bot representing ORT-GPT, a professional
+          computational biology service. I'm here to help you with your orders for genomics data and
+          computational analysis services. Simply type your request in the text box below, and once
+          you hit the submit button, your request will be shared with the ORT team.
+        </p>
+        <div class="query-box">
+          <textarea placeholder="Your Query"></textarea>
+          <button class="query-submit bar bar-button bar-action">
+            Submit Query <span class="bar-icon send"></span>
+          </button>
+        </div>
+      </div>
     </section>
     <section class="team-section alt text-section">
       <div class="section-header">
@@ -505,11 +518,64 @@ h1.tagline-text {
 }
 
 /* forth section */
-.gpt-section {
+.gpt-section .section-contents {
   display: flex;
   flex-flow: row wrap;
+  gap: 30px;
 }
-
+.gpt-section .section-text {
+  font-size: 23px;
+  line-height: 38px;
+  font-weight: 400;
+  color: var(--color-on-dark-alt);
+  flex: 1 1 550px;
+}
+.gpt-section .query-box {
+  background: var(--color-bg-alt);
+  font-size: 20px;
+  line-height: 33px;
+  border-radius: 20px;
+  margin-right: 30px;
+  flex: 2 1 450px;
+  /* a little neumorphism with the shadow */
+  box-shadow: 2px 2px 6px #cdcdcd80, -2px -2px 6px #ffffffff;
+  overflow: hidden;
+  position: relative;
+}
+.gpt-section .query-box textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: none;
+  resize: none;
+  font-size: 18px;
+  line-height: 30px;
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  outline: none;
+  padding: 20px 30px 50px;
+}
+.gpt-section .query-box .query-submit {
+  position: absolute;
+  bottom: 17px;
+  right: 17px;
+  height: 36px;
+  border: none;
+  background-color: var(--color-accent);
+  color: var(--color-on-dark);
+  padding-right: 14px;
+  gap: 10px;
+  transition: box-shadow 0.15s ease-out;
+}
+.gpt-section .query-box .query-submit:hover {
+  /* neumorphic shadows */
+  box-shadow: inset 2px 2px 5px #2c2c2c20, inset -2px -2px 5px #ffffff25;
+}
+.gpt-section .query-box .query-submit:active {
+  /* neumorphic shadows */
+  box-shadow: inset 2px 2px 8px #2c2c2c60, inset -2px -2px 8px #ffffff70;
+}
 /* fifth section */
 .team-section .section-contents {
   display: flex;

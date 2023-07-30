@@ -271,6 +271,9 @@ main.page {
 .bar-icon.down {
   background: url(@/assets/img/action/down.png);
 }
+.bar-icon.send {
+  background: url(@/assets/img/action/send.png);
+}
 .bar .bar-icon {
   width: var(--size-logo);
   height: var(--size-logo);
