@@ -614,6 +614,9 @@ section.about-section {
   gap: 24px;
   justify-content: flex-start;
 }
+.team-section .section-header {
+  margin-bottom: 8px;
+}
 .team-section .team-member {
   gap: var(--gap-team-member);
   padding: var(--padding-team-card);
