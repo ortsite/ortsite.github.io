@@ -90,7 +90,7 @@
                 @click="next_vid"
                 class="video-next bar bar-action bar-large"
               >
-                Next<span class="bar-icon right"></span>
+                <span class="desktop-text">Next</span><span class="bar-icon right"></span>
               </button>
             </div>
             <div class="video-after video-after-1"></div>
@@ -543,7 +543,14 @@ section.about-section {
 .services-section .video-next {
   z-index: 10;
 }
-
+@media (max-width: 620px) {
+  .video-next {
+    height: 42px;
+  }
+  .video-next .bar-icon {
+    margin: 0 -14px;
+  }
+}
 .services-section #video::before {
   content: "";
   display: block;
